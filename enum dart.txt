@@ -1,0 +1,57 @@
+void main(){
+  
+  // quando eu instanciar uma nova classe
+  // e neste caso quando meu objeto da classe Pagamento for
+  // invocar a função 'pegar' eu passo o parametro que a função
+  // exige, feito isso eu escolho dentro o tipo do parametro fornecido
+  // no caso o TipoPagemento que é 'enum', eu então posso acessar suas novas
+  // propriedades que permitirão que eu acesse o valor dado a cada pelo 'map'
+  var pagamento = Pagamento();
+  pagamento.pegar(TipoPagamento.PIX);
+  
+}
+
+enum TipoPagamento{
+    
+  PIX, BOLETO, CARTAO;
+}
+
+
+// crio uma extensão que irá permitir atribuir novas propriedades ao meu 'enum'
+// uso o 'map' que vai permitir que eu atribue um valor para cada tipo
+// de opção do meu 'enum'
+// retorno então o objeto selecionado do meu map
+ 
+extension ExtensionTipoPagamento on TipoPagamento{
+  
+  String toValue(){
+    
+    Map map = {
+      
+      TipoPagamento.PIX: 'Pix',
+      TipoPagamento.BOLETO: 'Boleto',
+      TipoPagamento.CARTAO: 'Cartão'
+    };
+    
+    return map[this];
+  }
+}
+
+
+
+// crio uma classe que tem uma função void que recebe como parametro(tipoPagamento)
+// do TipoPagamento que é um 'enum'
+class Pagamento{
+  
+  void pegar(TipoPagamento tipoPagamento){
+    
+    if(tipoPagamento.toValue()== 'Pix'){
+      print('Pagando com Pix');
+    }else if (tipoPagamento.toValue() == 'Boleto'){
+      print('Pagando com Boleto');
+    }else if (tipoPagamento.toValue()=='Cartao'){
+      print('Pagando com Cartao');
+    }
+  }
+  
+}
